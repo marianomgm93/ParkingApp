@@ -1,4 +1,4 @@
-package com.app.Parking.entidades;
+package com.app.Parking.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -10,16 +10,16 @@ public class MediosPago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     private String medioDePago;
 
     private Double recargo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime cr;
 
-    @Column(nullable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private String crUser;
 
     private LocalDateTime ts;

@@ -1,4 +1,4 @@
-package com.app.Parking.entidades;
+package com.app.Parking.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -10,7 +10,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String nombre;
@@ -32,10 +32,10 @@ public class Usuario {
 
     private Boolean activo;
 
-    @Column(nullable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private LocalDateTime cr;
 
-    @Column(nullable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private String crUser;
 
     private LocalDateTime ts;

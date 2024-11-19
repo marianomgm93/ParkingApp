@@ -1,9 +1,8 @@
-package com.app.Parking.entidades;
+package com.app.Parking.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Data;
-
 
 @Data
 @Entity
@@ -11,7 +10,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String nombre;
@@ -34,5 +33,13 @@ public class Client {
 
     private String tsUser;
 
-}
+    public Client(String nombre, String telefono, String email, Integer tipoCliente, LocalDateTime cr, String crUser) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+        this.tipoCliente = tipoCliente;
+        this.cr = cr;
+        this.crUser = crUser;
+    }
 
+}
