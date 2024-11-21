@@ -42,5 +42,30 @@ public class Usuario {
 
     private String tsUser;
 
-    // Getters y Setters
+    public Usuario(String nombre, String apellido, String password, Integer tipoUsuario, String telefono, String email, String direccion, Boolean activo, LocalDateTime cr, String crUser) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+        this.activo = activo;
+        this.cr = cr;
+        this.crUser = crUser;
+    }
+
+    public Usuario(String nombre, String apellido, String password, Integer tipoUsuario, String telefono, String email, String direccion, LocalDateTime cr) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+        this.cr = cr;
+    }
+    
+
+    
 }

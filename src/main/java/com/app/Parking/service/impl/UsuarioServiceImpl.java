@@ -1,44 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.app.Parking.service.impl;
 
+import com.app.Parking.exception.MiException;
 import com.app.Parking.model.Usuario;
 import com.app.Parking.repository.UsuarioRepository;
 import com.app.Parking.service.UsuarioService;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author mariano
- */
+@Service
+@Slf4j
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
+    
     @Override
-    @Transactional(readOnly=true)
-    public List<Usuario> listarPersonas() {
-        return (List<Usuario>) usuarioRepository.findAll();
-    }
+    public void registrar(String nombre, String apellido, String password, Integer tipoUsuario, String telefono, String email, String direccion) {
 
-    @Override
-    public void guardar(Usuario usuario) {
+        Usuario usuario = new Usuario(nombre, apellido, password, tipoUsuario, telefono, email, direccion, LocalDateTime.MIN);
+
         usuarioRepository.save(usuario);
     }
 
     @Override
-    public void eliminar(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Transactional(readOnly = true)
+    public List<Usuario> listarPersonas() {
+        return (List<Usuario>) usuarioRepository.findAll();
+    }
+
+    //CREAR MODIFICAR USUARIO
+    @Override
+    @Transactional
+    public void modificar(Usuario usuario) {
+
+        usuarioRepository.save(usuario);
     }
 
     @Override
-    public Usuario encontrarPersona(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Transactional
+    public void eliminar(Usuario usuario) {
+        usuario.setActivo(false);
+        usuarioRepository.save(usuario);
+    }
+
+    /**
+     * Buscar usuario por email
+     *
+     * @param email
+     * @return
+     * @throws MiException
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Usuario buscarPorEmail(String email) throws MiException {
+        Optional<Usuario> respuesta = usuarioRepository.findByEmail(email);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            return usuario;
+
+        } else {
+            throw new MiException("El email es invalido o se encuentra vacio");
+        }
+
     }
 
 }

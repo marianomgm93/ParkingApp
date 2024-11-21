@@ -33,13 +33,16 @@ public class Client {
 
     private String tsUser;
 
-    public Client(String nombre, String telefono, String email, Integer tipoCliente, LocalDateTime cr, String crUser) {
+    public Client(String nombre, String telefono, String email, Integer tipoCliente, LocalDateTime cr) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.tipoCliente = tipoCliente;
         this.cr = cr;
-        this.crUser = crUser;
     }
+
+
+
+    
 
 }
