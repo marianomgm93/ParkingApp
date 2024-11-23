@@ -1,5 +1,6 @@
 package com.app.Parking.model;
 
+import com.app.Parking.enumeration.TipoVehiculo;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -12,11 +13,13 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private Long idClient;
-
+    @ManyToOne
+    @JoinColumn(name = "IdClient", nullable = false)
+    private Client client;
+    
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private String tipo;
+    private TipoVehiculo tipo;
 
     @Column(nullable = false, length = 50)
     private String patente;
@@ -36,5 +39,12 @@ public class Vehiculo {
     private LocalDateTime ts;
 
     private String tsUser;
+
+    public Vehiculo(Client client, TipoVehiculo tipo, String patente, LocalDateTime cr) {
+        this.client = client;
+        this.tipo = tipo;
+        this.patente = patente;
+        this.cr = cr;
+    }
 
 }

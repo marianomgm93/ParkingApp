@@ -1,5 +1,6 @@
 package com.app.Parking.service.impl;
 
+import com.app.Parking.enumeration.TipoUsuario;
 import com.app.Parking.exception.MiException;
 import com.app.Parking.model.Usuario;
 import com.app.Parking.repository.UsuarioRepository;
@@ -20,7 +21,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioRepository usuarioRepository;
     
     @Override
-    public void registrar(String nombre, String apellido, String password, Integer tipoUsuario, String telefono, String email, String direccion) {
+    public void registrar(String nombre, String apellido, String password,TipoUsuario tipoUsuario, String telefono, String email, String direccion) {
 
         Usuario usuario = new Usuario(nombre, apellido, password, tipoUsuario, telefono, email, direccion, LocalDateTime.MIN);
 
@@ -29,7 +30,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Usuario> listarPersonas() {
+    public List<Usuario> listar() {
         return (List<Usuario>) usuarioRepository.findAll();
     }
 

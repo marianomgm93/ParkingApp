@@ -41,6 +41,7 @@ public class ClientServiceImpl implements ClientService {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Client buscarPorEmail(String email) throws MiException {
         Optional<Client> respuesta = clientRepository.findByEmail(email);
@@ -52,6 +53,7 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Client> listarPorNombre(String nombre) throws MiException {
         List<Client> clientes = clientRepository.findByNombreContaining(nombre);

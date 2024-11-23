@@ -1,5 +1,6 @@
 package com.app.Parking.model;
 
+import com.app.Parking.enumeration.TipoUsuario;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -21,8 +22,9 @@ public class Usuario {
     @Column(nullable = false, length = 50)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Integer tipoUsuario;
+    private TipoUsuario tipoUsuario;
 
     private String telefono;
 
@@ -42,7 +44,7 @@ public class Usuario {
 
     private String tsUser;
 
-    public Usuario(String nombre, String apellido, String password, Integer tipoUsuario, String telefono, String email, String direccion, Boolean activo, LocalDateTime cr, String crUser) {
+    public Usuario(String nombre, String apellido, String password, TipoUsuario tipoUsuario, String telefono, String email, String direccion, Boolean activo, LocalDateTime cr, String crUser) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
@@ -55,7 +57,7 @@ public class Usuario {
         this.crUser = crUser;
     }
 
-    public Usuario(String nombre, String apellido, String password, Integer tipoUsuario, String telefono, String email, String direccion, LocalDateTime cr) {
+    public Usuario(String nombre, String apellido, String password, TipoUsuario tipoUsuario, String telefono, String email, String direccion, LocalDateTime cr) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.password = password;
@@ -65,7 +67,5 @@ public class Usuario {
         this.direccion = direccion;
         this.cr = cr;
     }
-    
 
-    
 }
